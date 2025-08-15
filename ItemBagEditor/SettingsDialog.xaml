@@ -1,0 +1,187 @@
+<Window x:Class="ItemBagEditor.SettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings - ItemBag Editor" 
+        Height="500" Width="600"
+        Background="{StaticResource PrimaryBrush}"
+        WindowStartupLocation="CenterOwner"
+        Icon="/icon.ico"
+        ResizeMode="CanResize">
+    
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   Text="Application Settings" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="{StaticResource TextBrush}"
+                   Margin="0,0,0,16"/>
+        
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                
+                <!-- File Paths Section -->
+                <GroupBox Header="📁 File Paths" 
+                          Style="{StaticResource ModernGroupBox}"
+                          Margin="0,0,0,16">
+                    <StackPanel Margin="10">
+                        
+                        <!-- ItemList.xml Path -->
+                        <DockPanel Margin="0,0,0,12">
+                            <Label Content="ItemList.xml Path:" 
+                                   DockPanel.Dock="Left" 
+                                   Width="150"
+                                   Foreground="{StaticResource TextBrush}"
+                                   VerticalAlignment="Center"/>
+                            <Button x:Name="btnBrowseItemList" 
+                                    Content="Browse..." 
+                                    DockPanel.Dock="Right"
+                                    Style="{StaticResource ModernButton}"
+                                    Click="btnBrowseItemList_Click"
+                                    Margin="8,0,0,0"/>
+                            <TextBox x:Name="txtItemListPath" 
+                                     Style="{StaticResource ModernTextBox}"
+                                     ToolTip="Path to your ItemList.xml file"/>
+                        </DockPanel>
+                        
+                        <!-- ItemBag Folder Path -->
+                        <DockPanel Margin="0,0,0,12">
+                            <Label Content="ItemBag Folder:" 
+                                   DockPanel.Dock="Left" 
+                                   Width="150"
+                                   Foreground="{StaticResource TextBrush}"
+                                   VerticalAlignment="Center"/>
+                            <Button x:Name="btnBrowseItemBagFolder" 
+                                    Content="Browse..." 
+                                    DockPanel.Dock="Right"
+                                    Style="{StaticResource ModernButton}"
+                                    Click="btnBrowseItemBagFolder_Click"
+                                    Margin="8,0,0,0"/>
+                            <TextBox x:Name="txtItemBagFolderPath" 
+                                     Style="{StaticResource ModernTextBox}"
+                                     ToolTip="Path to your ItemBag folder"/>
+                        </DockPanel>
+                        
+
+                    </StackPanel>
+                </GroupBox>
+                
+                <!-- Logging Section -->
+                <GroupBox Header="📝 Logging Configuration" 
+                          Style="{StaticResource ModernGroupBox}"
+                          Margin="0,0,0,16">
+                    <StackPanel Margin="10">
+                        
+                        <!-- Enable File Logging -->
+                        <DockPanel Margin="0,0,0,12">
+                            <CheckBox x:Name="chkEnableFileLogging" 
+                                      Content="Enable file logging" 
+                                      DockPanel.Dock="Left"
+                                      Foreground="{StaticResource TextBrush}"
+                                      VerticalAlignment="Center"
+                                      Checked="chkEnableFileLogging_Checked"
+                                      Unchecked="chkEnableFileLogging_Unchecked"/>
+                        </DockPanel>
+                        
+                        <!-- Log Level -->
+                        <DockPanel Margin="0,0,0,12">
+                            <Label Content="Log Level:" 
+                                   DockPanel.Dock="Left" 
+                                   Width="150"
+                                   Foreground="{StaticResource TextBrush}"
+                                   VerticalAlignment="Center"/>
+                            <ComboBox x:Name="cboLogLevel" 
+                                      Style="{StaticResource ModernComboBox}"
+                                      Width="200"
+                                      HorizontalAlignment="Left"
+                                      SelectionChanged="cboLogLevel_SelectionChanged"/>
+                        </DockPanel>
+                        
+                        <!-- Log File Path (read-only when enabled) -->
+                        <DockPanel Margin="0,0,0,8">
+                            <Label Content="Log File Path:" 
+                                   DockPanel.Dock="Left" 
+                                   Width="150"
+                                   Foreground="{StaticResource TextBrush}"
+                                   VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtLogFilePath" 
+                                     Style="{StaticResource ModernTextBox}"
+                                     IsReadOnly="True"
+                                     ToolTip="Path where log files will be stored"/>
+                        </DockPanel>
+                        
+                        <TextBlock Text="File logging creates daily log files in the 'logs' folder with 7-day retention. Console logging is always active." 
+                                   Foreground="{StaticResource SecondaryTextBrush}"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+                
+                <!-- Advanced Section -->
+                <GroupBox Header="⚙️ Advanced Settings" 
+                          Style="{StaticResource ModernGroupBox}"
+                          Margin="0,0,0,16">
+                    <StackPanel Margin="10">
+                        
+                        <!-- Auto-save -->
+                        <DockPanel Margin="0,0,0,12">
+                            <CheckBox x:Name="chkAutoSave" 
+                                      Content="Auto-save changes every 5 minutes" 
+                                      DockPanel.Dock="Left"
+                                      Foreground="{StaticResource TextBrush}"
+                                      VerticalAlignment="Center"/>
+                        </DockPanel>
+                        
+                        <!-- Backup on save -->
+                        <DockPanel Margin="0,0,0,8">
+                            <CheckBox x:Name="chkBackupOnSave" 
+                                      Content="Create backup (.bak) when saving files" 
+                                      DockPanel.Dock="Left"
+                                      Foreground="{StaticResource TextBrush}"
+                                      VerticalAlignment="Center"/>
+                        </DockPanel>
+                        
+                        <TextBlock Text="Advanced settings affect how the application behaves during normal operation." 
+                                   Foreground="{StaticResource SecondaryTextBrush}"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+                
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,16,0,0">
+            <Button x:Name="btnResetToDefaults" 
+                    Content="Reset to Defaults" 
+                    Style="{StaticResource ModernButton}"
+                    Click="btnResetToDefaults_Click"
+                    Margin="0,0,8,0"/>
+            <Button x:Name="btnCancel" 
+                    Content="Cancel" 
+                    Style="{StaticResource ModernButton}"
+                    Click="btnCancel_Click"
+                    Margin="0,0,8,0"/>
+            <Button x:Name="btnSave" 
+                    Content="Save Settings" 
+                    Style="{StaticResource ModernButton}"
+                    Click="btnSave_Click"
+                    IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

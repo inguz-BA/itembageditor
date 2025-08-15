@@ -1,0 +1,275 @@
+<Window x:Class="ItemBagEditor.EditItemDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Item Configuration" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        ToolTip="Edit the configuration of an existing item in your Drop Section. Modify properties like Skill, Luck, Option, Excellent, Socket Count, Elemental, and more. All changes are applied in real-time to the item configuration.">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Text="Edit Item Properties" 
+                   FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        
+        <!-- Item Image Preview -->
+        <GroupBox Grid.Row="1" Header="Item Preview" Margin="0,0,0,10">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Item Image -->
+                <Border Grid.Column="0" 
+                        Background="#F0F0F0" BorderBrush="#CCCCCC" BorderThickness="1" 
+                        CornerRadius="3" Padding="5" Margin="0,0,15,0">
+                    <Image x:Name="imgItemPreview" 
+                           Width="64" Height="64" 
+                           Stretch="Uniform"/>
+                </Border>
+                
+                <!-- Item Details - Right side -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,0,0">
+                    
+                    <!-- Item Info -->
+                    <TextBlock x:Name="txtItemInfo" Text="Category: 0, Index: 0" 
+                               FontWeight="Bold" Margin="0,0,0,8"/>
+                    
+                    <!-- Item Name -->
+                    <TextBlock x:Name="txtItemName" Text="Item Name" 
+                               FontStyle="Italic" Foreground="Gray" 
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        
+        <!-- Content -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Basic Information -->
+                <GroupBox Header="Basic Information" Margin="0,0,0,10">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Column="0" Grid.Row="0" Content="Category:"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtCategory" Margin="5" IsReadOnly="True"/>
+                        <Label Grid.Column="2" Grid.Row="0" Content="Index:"/>
+                        <TextBox Grid.Column="3" Grid.Row="0" x:Name="txtIndex" Margin="5" IsReadOnly="True"/>
+                        
+                        <Label Grid.Column="0" Grid.Row="1" Content="Name:"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtName" Margin="5" Grid.ColumnSpan="3" IsReadOnly="True"/>
+                        
+                        <Label Grid.Column="0" Grid.Row="2" Content="Min Level:"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtMinLevel" Margin="5"
+                                 ToolTip="Minimum level the item should drop with. Must be lower or equal to Item Max Level."/>
+                        <Label Grid.Column="2" Grid.Row="2" Content="Max Level:"/>
+                        <TextBox Grid.Column="3" Grid.Row="2" x:Name="txtMaxLevel" Margin="5"
+                                 ToolTip="Maximum level the item should drop with. Must be greater or equal to Item Min Level."/>
+                    </Grid>
+                </GroupBox>
+                
+                <!-- Enhancement Properties -->
+                <GroupBox Header="Enhancement Properties" Margin="0,0,0,10">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Column="0" Grid.Row="0" Content="Skill:"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" x:Name="cmbSkill" Margin="5"
+                                  ToolTip="0 = No Skill, -1 = Random (50/50% chance), 1 = With Skill">
+                            <ComboBoxItem Content="No Skill (0)" Tag="0"/>
+                            <ComboBoxItem Content="Random (-1)" Tag="-1"/>
+                            <ComboBoxItem Content="With Skill (1)" Tag="1"/>
+                        </ComboBox>
+                        <Label Grid.Column="2" Grid.Row="0" Content="Luck:"/>
+                        <ComboBox Grid.Column="3" Grid.Row="0" x:Name="cmbLuck" Margin="5"
+                                  ToolTip="0 = No Luck, -1 = Random (50/50% chance), 1 = With Luck">
+                            <ComboBoxItem Content="No Luck (0)" Tag="0"/>
+                            <ComboBoxItem Content="Random (-1)" Tag="-1"/>
+                            <ComboBoxItem Content="With Luck (1)" Tag="1"/>
+                        </ComboBox>
+                        
+                        <Label Grid.Column="0" Grid.Row="1" Content="Option:"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" x:Name="cmbOption" Margin="5"
+                                  ToolTip="0 = No Option, -1 = Random, 1-7 = With specified option (+4 to +28)">
+                            <ComboBoxItem Content="No Option (0)" Tag="0"/>
+                            <ComboBoxItem Content="Random (-1)" Tag="-1"/>
+                            <ComboBoxItem Content="+4 (1)" Tag="1"/>
+                            <ComboBoxItem Content="+8 (2)" Tag="2"/>
+                            <ComboBoxItem Content="+12 (3)" Tag="3"/>
+                            <ComboBoxItem Content="+16 (4)" Tag="4"/>
+                            <ComboBoxItem Content="+20 (5)" Tag="5"/>
+                            <ComboBoxItem Content="+24 (6)" Tag="6"/>
+                            <ComboBoxItem Content="+28 (7)" Tag="7"/>
+                        </ComboBox>
+                        <Label Grid.Column="2" Grid.Row="1" Content="Durability:"/>
+                        <TextBox Grid.Column="3" Grid.Row="1" x:Name="txtDurability" Margin="5"
+                                 ToolTip="Durability value for the item (0-255). Only add to XML if > 0."/>
+                        
+                        <Label Grid.Column="0" Grid.Row="2" Content="Excellent:"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" x:Name="cmbExc" Margin="5" Grid.ColumnSpan="3"
+                                 ToolTip="-1 = No exc option, -2 = Random count of random options, -3;X = Specified count, or specific options like 1;2;3">
+                            <ComboBoxItem Content="No exc option (-1)" Tag="-1"/>
+                            <ComboBoxItem Content="Random count of random options (-2)" Tag="-2"/>
+                            <ComboBoxItem Content="1;2;3 - Specific options 1,2,3" Tag="1;2;3"/>
+                            <ComboBoxItem Content="1;2;4 - Specific options 1,2,4" Tag="1;2;4"/>
+                            <ComboBoxItem Content="1;2;5 - Specific options 1,2,5" Tag="1;2;5"/>
+                            <ComboBoxItem Content="1;2;6 - Specific options 1,2,6" Tag="1;2;6"/>
+                            <ComboBoxItem Content="1;2;7 - Specific options 1,2,7" Tag="1;2;7"/>
+                            <ComboBoxItem Content="1;3;4 - Specific options 1,3,4" Tag="1;3;4"/>
+                            <ComboBoxItem Content="1;3;5 - Specific options 1,3,5" Tag="1;3;5"/>
+                            <ComboBoxItem Content="1;3;6 - Specific options 1,3,6" Tag="1;3;6"/>
+                            <ComboBoxItem Content="1;3;7 - Specific options 1,3,7" Tag="1;3;7"/>
+                            <ComboBoxItem Content="1;4;5 - Specific options 1,4,5" Tag="1;4;5"/>
+                            <ComboBoxItem Content="1;4;6 - Specific options 1,4,6" Tag="1;4;6"/>
+                            <ComboBoxItem Content="1;4;7 - Specific options 1,4,7" Tag="1;4;7"/>
+                            <ComboBoxItem Content="1;5;6 - Specific options 1,5,6" Tag="1;5;6"/>
+                            <ComboBoxItem Content="1;5;7 - Specific options 1,5,7" Tag="1;5;7"/>
+                            <ComboBoxItem Content="1;6;7 - Specific options 1,6,7" Tag="1;6;7"/>
+                            <ComboBoxItem Content="2;3;4 - Specific options 2,3,4" Tag="2;3;4"/>
+                            <ComboBoxItem Content="2;3;5 - Specific options 2,3,5" Tag="2;3;5"/>
+                            <ComboBoxItem Content="2;3;6 - Specific options 2,3,6" Tag="2;3;6"/>
+                            <ComboBoxItem Content="2;3;7 - Specific options 2,3,7" Tag="2;3;7"/>
+                            <ComboBoxItem Content="2;4;5 - Specific options 2,4,5" Tag="2;4;5"/>
+                            <ComboBoxItem Content="2;4;6 - Specific options 2,4,6" Tag="2;4;6"/>
+                            <ComboBoxItem Content="2;4;7 - Specific options 2,4,7" Tag="2;4;7"/>
+                            <ComboBoxItem Content="2;5;6 - Specific options 2,5,6" Tag="2;5;6"/>
+                            <ComboBoxItem Content="2;5;7 - Specific options 2,5,7" Tag="2;5;7"/>
+                            <ComboBoxItem Content="2;6;7 - Specific options 2,6,7" Tag="2;6;7"/>
+                            <ComboBoxItem Content="3;4;5 - Specific options 3,4,5" Tag="3;4;5"/>
+                            <ComboBoxItem Content="3;4;6 - Specific options 3,4,6" Tag="3;4;6"/>
+                            <ComboBoxItem Content="3;4;7 - Specific options 3,4,7" Tag="3;4;7"/>
+                            <ComboBoxItem Content="3;5;6 - Specific options 3,5,6" Tag="3;5;6"/>
+                            <ComboBoxItem Content="3;5;7 - Specific options 3,5,7" Tag="3;5;7"/>
+                            <ComboBoxItem Content="3;6;7 - Specific options 3,6,7" Tag="3;6;7"/>
+                            <ComboBoxItem Content="4;5;6 - Specific options 4,5,6" Tag="4;5;6"/>
+                            <ComboBoxItem Content="4;5;7 - Specific options 4,5,7" Tag="4;5;7"/>
+                            <ComboBoxItem Content="4;6;7 - Specific options 4,6,7" Tag="4;6;7"/>
+                            <ComboBoxItem Content="5;6;7 - Specific options 5,6,7" Tag="5;6;7"/>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+                
+                <!-- Advanced Properties -->
+                <GroupBox Header="Advanced Properties" Margin="0,0,0,10">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Column="0" Grid.Row="0" Content="Set Item:"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" x:Name="cmbSetItem" Margin="5"
+                                  ToolTip="0 = No ancient, 1 = Ancient (random Tier of specified item). Must be added as ancient, otherwise option will be ignored.">
+                            <ComboBoxItem Content="No Ancient (0)" Tag="0"/>
+                            <ComboBoxItem Content="Ancient (1)" Tag="1"/>
+                        </ComboBox>
+                        <Label Grid.Column="2" Grid.Row="0" Content="Socket Count:"/>
+                        <ComboBox Grid.Column="3" Grid.Row="0" x:Name="cmbSocketCount" Margin="5"
+                                  ToolTip="0 = No sockets, 1-5 = Up to X slots, -2 = Random count (Pentagrams and Socket Items). Item type must be set to 2 in ItemList.xml">
+                            <ComboBoxItem Content="No Sockets (0)" Tag="0"/>
+                            <ComboBoxItem Content="1 Socket (1)" Tag="1"/>
+                            <ComboBoxItem Content="2 Sockets (2)" Tag="2"/>
+                            <ComboBoxItem Content="3 Sockets (3)" Tag="3"/>
+                            <ComboBoxItem Content="4 Sockets (4)" Tag="4"/>
+                            <ComboBoxItem Content="5 Sockets (5)" Tag="5"/>
+                            <ComboBoxItem Content="Random Count (-2)" Tag="-2"/>
+                        </ComboBox>
+                        
+                        <Label Grid.Column="0" Grid.Row="1" Content="Opt Slot Info:"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtOptSlotInfo" Margin="5"
+                                 ToolTip="Allows to configure option slots for mastery pentagrams, X;Y where X is minimum number of options slots and Y is maximum number of options slots, 0-4"/>
+                        <Label Grid.Column="2" Grid.Row="1" Content="Elemental:"/>
+                        <ComboBox Grid.Column="3" Grid.Row="1" x:Name="cmbElementalItem" Margin="5"
+                                  ToolTip="0 = No element, 1 = Fire, 2 = Water, 3 = Earth, 4 = Wind, 5 = Darkness, -1 = Random element">
+                            <ComboBoxItem Content="No Element (0)" Tag="0"/>
+                            <ComboBoxItem Content="Fire (1)" Tag="1"/>
+                            <ComboBoxItem Content="Water (2)" Tag="2"/>
+                            <ComboBoxItem Content="Earth (3)" Tag="3"/>
+                            <ComboBoxItem Content="Wind (4)" Tag="4"/>
+                            <ComboBoxItem Content="Darkness (5)" Tag="5"/>
+                            <ComboBoxItem Content="Random Element (-1)" Tag="-1"/>
+                        </ComboBox>
+                        
+                        <Label Grid.Column="0" Grid.Row="2" Content="Duration:"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtDuration" Margin="5"
+                                 ToolTip="Allows to drop expirable item, seconds. Not every item is suitable for period items system, please test before putting on live server"/>
+                        <Label Grid.Column="2" Grid.Row="2" Content="Rate:"/>
+                        <TextBox Grid.Column="3" Grid.Row="2" x:Name="txtRate" Margin="5"
+                                 ToolTip="Drop rate for this item (0-10000). Higher values increase drop chance."/>
+                    </Grid>
+                </GroupBox>
+                
+                <!-- Errtel Rank Options -->
+                <GroupBox Header="Errtel Rank Options" Margin="0,0,0,10">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <CheckBox Grid.Column="0" Grid.Row="0" x:Name="chkEnableErrtelRank" Content="Enable Errtel Rank" 
+                                  Margin="5" VerticalAlignment="Center"
+                                  ToolTip="Enable to set Errtel Rank for this item. Only applies to Errtel items (Category 12/13, Index 200-299)."/>
+                        
+                        <Label Grid.Column="1" Grid.Row="0" Content="Rank:" Margin="5,0,0,0"/>
+                        <ComboBox Grid.Column="2" Grid.Row="0" x:Name="cmbErrtelRank" Margin="5"
+                                  ToolTip="Defines rank to drop Errtel item with, 1-5. Does not apply to Errtels of Beginner. Default is 1.">
+                            <ComboBoxItem Content="0 - No Errtel Rank" Tag="0"/>
+                            <ComboBoxItem Content="1 - Rank 1" Tag="1"/>
+                            <ComboBoxItem Content="2 - Rank 2" Tag="2"/>
+                            <ComboBoxItem Content="3 - Rank 3" Tag="3"/>
+                            <ComboBoxItem Content="4 - Rank 4" Tag="4"/>
+                            <ComboBoxItem Content="5 - Rank 5" Tag="5"/>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+                
+
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Buttons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="btnOK" Content="OK" Width="80" Height="25" Margin="5,0,0,0" Click="btnOK_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="80" Height="25" Margin="5,0,0,0" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

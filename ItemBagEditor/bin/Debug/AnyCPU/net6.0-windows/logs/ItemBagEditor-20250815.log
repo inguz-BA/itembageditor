@@ -1,0 +1,50 @@
+2025-08-15 11:51:03.686 +03:00 [INF] File logging enabled - logs will be written to logs/ folder
+2025-08-15 11:51:03.766 +03:00 [INF] Services configuration completed
+2025-08-15 11:51:03.808 +03:00 [INF] Application starting up...
+2025-08-15 11:51:03.810 +03:00 [INF] Services configured successfully
+2025-08-15 11:51:03.835 +03:00 [INF] MainWindow constructor started
+2025-08-15 11:51:03.835 +03:00 [INF] MainWindow dependencies validated
+2025-08-15 11:51:03.984 +03:00 [INF] MainWindow InitializeComponent completed
+2025-08-15 11:51:03.984 +03:00 [INF] MainWindow dependencies injected successfully
+2025-08-15 11:51:03.985 +03:00 [DBG] Initializing UI components
+2025-08-15 11:51:03.985 +03:00 [DBG] UI initialization completed
+2025-08-15 11:51:03.989 +03:00 [DBG] Status updated: Ready to edit ItemBags
+2025-08-15 11:51:03.990 +03:00 [INF] Loading embedded ItemList automatically
+2025-08-15 11:51:03.990 +03:00 [DBG] Status updated: Loading embedded ItemList...
+2025-08-15 11:51:03.992 +03:00 [INF] Loading ItemList from local file or embedded resources
+2025-08-15 11:51:03.992 +03:00 [INF] Found local ItemList.xml, loading from file: C:\Users\ennzo\OneDrive\Desktop\Tools\IBC\ItemBagEditor\bin\Debug\AnyCPU\net6.0-windows\ItemList.xml
+2025-08-15 11:51:04.061 +03:00 [INF] UI initialization completed successfully
+2025-08-15 11:51:04.061 +03:00 [INF] MainWindow initialization completed successfully
+2025-08-15 11:51:04.061 +03:00 [INF] Main window created, showing...
+2025-08-15 11:51:04.248 +03:00 [INF] Application startup completed successfully
+2025-08-15 11:51:04.251 +03:00 [INF] Local ItemList.xml loaded successfully, size: 3057514 characters
+2025-08-15 11:51:04.373 +03:00 [DBG] Clearing existing item collections
+2025-08-15 11:51:04.373 +03:00 [DBG] Processing category 0: Swords
+2025-08-15 11:51:04.374 +03:00 [DBG] Processing category 1: Axes
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 2: Maces and Scepters
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 3: Spears
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 4: Bows and Crossbows
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 5: Staffs
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 6: Shields
+2025-08-15 11:51:04.375 +03:00 [DBG] Processing category 7: Helmets
+2025-08-15 11:51:04.376 +03:00 [DBG] Processing category 8: Armors
+2025-08-15 11:51:04.377 +03:00 [DBG] Processing category 9: Pants
+2025-08-15 11:51:04.378 +03:00 [DBG] Processing category 10: Gloves
+2025-08-15 11:51:04.379 +03:00 [DBG] Processing category 11: Boots
+2025-08-15 11:51:04.380 +03:00 [DBG] Processing category 12: Pets and Rings and Misc
+2025-08-15 11:51:04.381 +03:00 [DBG] Processing category 13: Jewel and Misc
+2025-08-15 11:51:04.382 +03:00 [DBG] Processing category 14: Wings and Orbs and Spheres
+2025-08-15 11:51:04.383 +03:00 [DBG] Processing category 15: Scrolls
+2025-08-15 11:51:04.383 +03:00 [DBG] Processing category 16: Muuns
+2025-08-15 11:51:04.384 +03:00 [DBG] Processing category 19: (19) Uncategorized
+2025-08-15 11:51:04.384 +03:00 [DBG] Processing category 20: (20) Uncategorized
+2025-08-15 11:51:04.385 +03:00 [INF] ItemList loaded successfully. Total items: 4279, Categories: 19
+2025-08-15 11:51:04.385 +03:00 [INF] Embedded ItemList loaded successfully
+2025-08-15 11:51:04.388 +03:00 [DBG] Retrieved 19 categories
+2025-08-15 11:51:04.388 +03:00 [INF] Found 19 categories in embedded ItemList
+2025-08-15 11:51:04.388 +03:00 [DBG] Status updated: Embedded ItemList loaded successfully. Found 19 categories.
+2025-08-15 11:51:04.390 +03:00 [INF] Loading settings and auto-loading ItemBags
+2025-08-15 11:51:04.390 +03:00 [INF] No settings file found, skipping auto-loading
+2025-08-15 11:52:11.857 +03:00 [INF] Refresh ItemBag list button clicked
+2025-08-15 11:52:11.857 +03:00 [WRN] No ItemBag folder path set for refresh
+2025-08-15 11:52:16.211 +03:00 [INF] Application shutting down...

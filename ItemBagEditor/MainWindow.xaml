@@ -1,0 +1,260 @@
+<Window x:Class="ItemBagEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DV-Team EMU ItemBag Editor by Inguz" 
+        Height="900" Width="1400"
+        Background="{StaticResource PrimaryBrush}"
+        WindowStartupLocation="CenterScreen"
+        Icon="/icon.ico">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource SecondaryBrush}" Padding="16">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="ItemBag Editor" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="{StaticResource TextBrush}"
+                           VerticalAlignment="Center"/>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" 
+                          Margin="16,0" 
+                          Background="{StaticResource BorderBrush}"/>
+                <Button x:Name="btnSettings" 
+                        Content="⚙️ Settings" 
+                        Style="{StaticResource ModernButton}"
+                        Click="btnSettings_Click"
+                        ToolTip="Configure application settings, file paths, and logging"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Left Panel - ItemBag List -->
+            <GroupBox Grid.Column="0" 
+                      Header="ItemBag Files" 
+                      Style="{StaticResource ModernGroupBox}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button x:Name="btnRefreshList" 
+                                Content="Refresh" 
+                                Style="{StaticResource ModernButton}"
+                                Click="btnRefreshList_Click"/>
+                    </StackPanel>
+                    
+                    <ListBox x:Name="lstItemBags" 
+                             Grid.Row="1"
+                             Style="{StaticResource ModernListBox}"
+                             SelectionChanged="lstItemBags_SelectionChanged"/>
+                </Grid>
+            </GroupBox>
+            
+            <!-- Right Panel - ItemBag Editor -->
+            <ScrollViewer Grid.Column="1" 
+                          HorizontalScrollBarVisibility="Auto" 
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    
+                    <!-- Bag Configuration -->
+                    <!-- Removed - merged into Drop Sections tab -->
+                    
+                    <!-- Help Section -->
+                    <GroupBox Header="📚 Configuration Help" 
+                              Style="{StaticResource ModernGroupBox}">
+                        <Expander Header="Click to expand configuration explanations" 
+                                  IsExpanded="False">
+                            <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto">
+                                <StackPanel Margin="10">
+                                    
+                                    <!-- BagConfig Section -->
+                                    <GroupBox Header="🎒 Bag Configuration" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Name: Display name for the ItemBag configuration" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Item Rate: Chance to get items (n/10000). If &lt; 10000, Zen drop possible" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Set Item Rate: Drop rate for random set items from ancients pool (n/10000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Set Item Count: Number of set items to drop if SetItemRate &gt; 0" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Mastery Set Include: Include mastery set items (0=No, 1=Yes)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Money Drop: Zen amount to drop (required if ItemRate &lt; 10000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Pentagram Beginners: Drop Pentagram for Beginners (0=No, 1=Yes)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Bag Use Effect: -1=No effect, 0=Firecracker effect" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Party Drop Rate: Chance for party drop (n/10000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Bag Use Rate: Probability to use bag (n/10000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- SummonBook Section -->
+                                    <GroupBox Header="📖 Summon Book Configuration" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Enable: Activates Summon Book drop (0=No, 1=Yes)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Drop Rate: Summon Book drop rate (n/1000000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Item Category: Always 14 for Summon Books" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Item Index: Range 217-221 for different Summon Books" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- AddCoin Section -->
+                                    <GroupBox Header="🪙 Coin Configuration" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Enable: Activates coin award (0=No, 1=Yes)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Coin Type: 0=WCoin, 1=Goblin Point" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Coin Value: Points count to award" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Player Level Range: Min/Max level requirements" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Player Reset Range: Min/Max reset requirements" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- Ruud Section -->
+                                    <GroupBox Header="💎 Ruud Configuration" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Gain Rate: Chance to award Ruud (n/10000)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Min/Max Value: Ruud amount range to award" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Player Level Range: Min/Max level requirements" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Player Reset Range: Min/Max reset requirements" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Note: Use MAX for PlayerMaxLevel/PlayerMaxReset to use server limits" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- DropSection Section -->
+                                    <GroupBox Header="📦 Drop Section Configuration" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Use Mode: -1=Party and Non-party, 0=Non-party only, 1=Party only" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Display Name: Section name for logs and editors" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Class Restrictions: DW, DK, ELF, MG, DL, SU, RF, GL, RW, SLA, GC, LW, LM, IK, AC" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Player Requirements: Level and reset restrictions" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Map Number: -1 for all maps, or specific map number" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- Item Properties Section -->
+                                    <GroupBox Header="⚔️ Item Properties" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="• Skill: 0=No, -1=Random (50/50%), 1=With Skill" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Luck: 0=No, -1=Random (50/50%), 1=With Luck" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Option: 0=No, -1=Random, 1-7=+4 to +28" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Excellent: -1=No, -2=Random count, -3;X=Specified count" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Set Item: 0=No ancient, 1=Ancient (random Tier)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Socket Count: 0=No, 1-5=Slots, -2=Random (requires item type 2)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Elemental: 0=No, 1-5=Fire/Water/Earth/Wind/Darkness, -1=Random" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Errtel Rank: 1-5 for Errtel items (not for Beginners)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="• Duration: Seconds for expirable items (test before live)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- Drop Hierarchy Section -->
+                                    <GroupBox Header="🔄 Drop Hierarchy" Margin="0,0,0,10">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="Drop priority order:" 
+                                                       FontWeight="Bold" Margin="0,0,0,5"/>
+                                            <TextBlock Text="1. Pentagram for beginners (if enabled)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="2. Set Items (if SetItemRate &gt; 0)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="3. Zen (if MoneyDrop &gt; 0)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="4. Bag Items or Zen (from DropSection)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                            <TextBlock Text="5. Coins and/or Ruud (if enabled)" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,3"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Expander>
+                    </GroupBox>
+                    
+                    <!-- Drop Sections -->
+                    <GroupBox Header="Drop Sections" 
+                              Style="{StaticResource ModernGroupBox}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                                <Button x:Name="btnSaveItemBag" 
+                                        Content="💾 Save ItemBag" 
+                                        Style="{StaticResource ModernButton}"
+                                        Click="btnSaveItemBag_Click"
+                                        ToolTip="Save the current ItemBag configuration"/>
+                            </StackPanel>
+                            
+                            <TabControl x:Name="tabDropSections" 
+                                        Grid.Row="1"
+                                        Style="{StaticResource ModernTabControl}">
+                                <!-- Drop sections will be added here dynamically -->
+                            </TabControl>
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="2" 
+                   Background="{StaticResource SecondaryBrush}"
+                   Foreground="{StaticResource TextBrush}">
+            <StatusBarItem>
+                <TextBlock x:Name="txtStatus" Text="Ready"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock x:Name="txtFileInfo" Text="No file loaded"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
